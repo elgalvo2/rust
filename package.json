@@ -1,0 +1,29 @@
+{
+  "name": "rust",
+  "version": "1.0.0",
+  "description": "remediador de vulnerabilidades",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/elgalvo2/rust.git"
+  },
+  "keywords": [
+    "vulnerabilidades",
+    "pdf-t-json"
+  ],
+  "author": "L. Galvez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/elgalvo2/rust/issues"
+  },
+  "homepage": "https://github.com/elgalvo2/rust#readme",
+  "dependencies": {
+    "pdf2json": "^3.0.1",
+    "uuid": "^9.0.0"
+  }
+}

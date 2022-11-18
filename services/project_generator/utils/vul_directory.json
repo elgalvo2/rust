@@ -1,0 +1,13 @@
+{
+    "Unknow": 0,
+    "Buffer_Overflow_Unbounded_Format": 1,
+    "Incorrect_Permission_Assignment_For_Critical_Resources": 2,
+    "Insufficiently_Protected_Credentials": 3,
+    "Use_of_Obsolete_Functions": 4,
+    "Unchecked_Return_Value": 5,
+    "Use_of_Sizeof_On_a_Pointer_Type": 6,
+    "Memory_Leak": 7,
+    "Use_of_Uninitialized_Variable": 8,
+    "MemoryFree_on_StackVariable": 9,
+    "Dangerous_Functions": 10
+}
