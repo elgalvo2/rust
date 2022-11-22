@@ -1,9 +1,25 @@
 import {Analisys} from './services/project_generator/index.js'
 
-async function run_analysis(){
+
+function rust(args){
+    
+    switch(args[2]){
+        case 'analize':
+            run_analysis(args[3]);
+            break;
+        default:
+            break;
+        
+    }
+
+}
+
+
+
+async function run_analysis(pdf_name){
     let ana = new Analisys(
         "luis",
-        "report2",
+        pdf_name,
     )
     
     let done = await ana.run_analisys()
@@ -15,4 +31,5 @@ async function run_analysis(){
     
 }
 
-run_analysis()
+
+rust(process.argv)

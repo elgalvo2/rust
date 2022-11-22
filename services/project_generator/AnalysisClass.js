@@ -75,7 +75,7 @@ class Analisys {
     }
 
     cleanUp() {
-        fsPromises.rm(this.temp_json_path)
+        //fsPromises.rm(this.temp_json_path)
     }
 
     async saveResults() {
@@ -119,13 +119,20 @@ class Analisys {
 
     async extractInfo(json_path) {
 
-        let text_buffer = await this.getText(json_path)
+        let text_buffer = await this.getText(json_path) // retorna un arreglo de objetos que contienen la informacion de las palabras del documento (coordenadas x,y y texto)
 
         let vul_directorio = [] // aqui se guardan los indices del comienzo de cada vulnerabilidad
+
         let detalles_index // gurda el indice del objetoque contiene la palabra detalles
 
+        /**
+         * 
+         * A partir de aqui hay una oportunidad de mejora. Puede simplificarse drasticamente el codigo
+         */
+
         text_buffer.every((word, index) => { // obtener el indice donde se encuentra la palabra detalles
-            if (word.R[0].T == "Detalles") {
+
+            if (word.R[0].T == "Detalles") { // la logica de estre fragmento de codigo puede factorizarse 1. obtener las coordenadas de la palabra "Detalles" y excluir palabras a partir de su indice
 
                 detalles_index = index
                 return false
@@ -149,6 +156,9 @@ class Analisys {
         this.analysis_vulnerability_temp_dir = vul_directorio.map(el => { // desplazamos el vector que contiene los indices de las vulnerabilidades
             return el - vul_directorio[0]
         })
+        /**
+         * Final de bloque factorizable
+         */
         return;
 
     }
@@ -170,7 +180,8 @@ class Analisys {
 
     async getText(json_path) {
         let text = []
-
+        
+        console.log(json_path)
         let data = await fsPromises.readFile(json_path)
         let doc = JSON.parse(data)
         let pages = doc.Pages
