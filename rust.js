@@ -1,4 +1,4 @@
-import {Analisys} from './services/project_generator/index.js'
+import {Analisys} from './services/project_analizer/index.js'
 
 
 function rust(args){
