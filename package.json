@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "test",
-    "start": "node rust.js"
+    "start": "node rust"
   },
   "repository": {
     "type": "git",
@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/elgalvo2/rust#readme",
   "dependencies": {
+    "fs-extra": "^11.1.0",
     "pdf2json": "^3.0.1",
     "uuid": "^9.0.0"
   }
