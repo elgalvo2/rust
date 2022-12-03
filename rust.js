@@ -27,8 +27,8 @@ async function rust(args){
         case 'analize':
             run_analysis(args[3]);
             break;
-        case 'test_op':
-            await run_testOp(args[3],args[4])
+        case 'test_op':                         
+            await run_testOp(args[3],args[4]) //args[ node, rust, test_op, va161122 VALIDADOR_16112022 ]
             break;
         default:
             break;
