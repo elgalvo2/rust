@@ -8,7 +8,7 @@ class Solution {
         this.project_folder = project_folder // donde se encuentra lo que la clase va a modificar
         this.languaje_target = ''
         this.sol_identifier = ''
-        this.sol_header = ''
+        
     }
     comprobe_vul_sol() {
         let {
@@ -21,7 +21,6 @@ class Solution {
 
         if (name === 'Dangerous_Functions' && root_object === 'sprintf') {
             this.sol_identifier = 'DFsprintf'
-            this.sol_header = '#include <strsafe.h>'
             return true;
         }
         return false
