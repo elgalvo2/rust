@@ -19,7 +19,7 @@ class Analisys {
 
         this.uuid = uuid();
 
-        this.analisys_date = ()=>{
+        this.analisys_date = () => {
             let date = new Date()
             return `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}at-${date.getHours()}:${date.getMinutes()}`
         }
@@ -45,9 +45,9 @@ class Analisys {
                 this.extractInfo(this.temp_json_path).then(() => {
                     for (let i = 0; i < this.analysis_vulnerability_temp_dir.length; i++) {
                         let vulnerability = {}
-                        if(i < this.analysis_vulnerability_temp_dir.length-1){
-                            vulnerability = new Vulnerability(this.temp_buffer.slice(this.analysis_vulnerability_temp_dir[i],this.analysis_vulnerability_temp_dir[i+1]))
-                        }else{
+                        if (i < this.analysis_vulnerability_temp_dir.length - 1) {
+                            vulnerability = new Vulnerability(this.temp_buffer.slice(this.analysis_vulnerability_temp_dir[i], this.analysis_vulnerability_temp_dir[i + 1]))
+                        } else {
                             vulnerability = new Vulnerability(this.temp_buffer.slice(this.analysis_vulnerability_temp_dir[i]))
                         }
                         vulnerability.main()
@@ -57,12 +57,12 @@ class Analisys {
                             .catch(err => new Error(err))
                     }
                 })
-                .then(() => {
-                    this.saveResults()
-                })
-                .then(() => {
-                    this.cleanUp()
-                })
+                    .then(() => {
+                        this.saveResults()
+                    })
+                    .then(() => {
+                        this.cleanUp()
+                    })
             })
 
         } catch (err) {
@@ -86,18 +86,18 @@ class Analisys {
         let stats = this.runStats(analisys_result_buffer)
 
         await fsPromises.writeFile(this.save_path, JSON.stringify(analisys_result_buffer))
-        
 
-        await fsPromises.writeFile(this.statistics_save_path,JSON.stringify(stats))
 
-            
+        await fsPromises.writeFile(this.statistics_save_path, JSON.stringify(stats))
+
+
 
 
     }
 
     runStats(data_buffer) {
         let stats = {
-            analisys_id:this.uuid,
+            analisys_id: this.uuid,
             pdf_name: this.pdf_name,
             date: this.analisys_date(),
             total_vulnerabilities_found: data_buffer.length,
@@ -105,10 +105,25 @@ class Analisys {
             vulnerabilities_per_type: {},
             vulnerabilities_per_root_object: {},
 
+
         }
 
         data_buffer.forEach((el) => {
-            (!stats.vulnerabilities_per_file[el.root_file]) ? stats.vulnerabilities_per_file[el.root_file] = 1 : stats.vulnerabilities_per_file[el.root_file] += 1;
+
+            if (!stats.vulnerabilities_per_file[el.root_file]) {
+                stats.vulnerabilities_per_file[el.root_file] = {
+                    total: 1,
+                    [el.name]: 1
+                }
+
+            } else {
+                
+                    (!stats.vulnerabilities_per_file[el.root_file][el.name]) ?
+                    stats.vulnerabilities_per_file[el.root_file][el.name] = 1
+                    :
+                    stats.vulnerabilities_per_file[el.root_file][el.name]+=1;
+            }
+
             (!stats.vulnerabilities_per_type[el.name]) ? stats.vulnerabilities_per_type[el.name] = 1 : stats.vulnerabilities_per_type[el.name] += 1;
             (!stats.vulnerabilities_per_root_object[el.root_object]) ? stats.vulnerabilities_per_root_object[el.root_object] = 1 : stats.vulnerabilities_per_root_object[el.root_object] += 1;
         })
@@ -180,7 +195,7 @@ class Analisys {
 
     async getText(json_path) {
         let text = []
-        
+
         console.log(json_path)
         let data = await fsPromises.readFile(json_path)
         let doc = JSON.parse(data)
@@ -208,7 +223,7 @@ class Analisys {
             callback()
         });
 
-        pdfParser.loadPDF(join(this.pdf_root_path, pdf_name+'.pdf'))
+        pdfParser.loadPDF(join(this.pdf_root_path, pdf_name + '.pdf'))
 
 
     }
