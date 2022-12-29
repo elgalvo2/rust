@@ -26,5 +26,9 @@
     "fs-extra": "^11.1.0",
     "pdf2json": "^3.0.1",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "jasmine": "^4.5.0",
+    "mocha": "^10.2.0"
   }
 }
